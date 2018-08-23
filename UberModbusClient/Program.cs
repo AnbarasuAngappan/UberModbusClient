@@ -11,6 +11,7 @@ namespace UberModbusClient
     {
         public static ModbusClient modbusClient;
         public static Program program;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Please Enter The Meter IP Address:");
