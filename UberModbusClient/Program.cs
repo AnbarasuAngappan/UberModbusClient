@@ -22,11 +22,13 @@ namespace UberModbusClient
                 modbusClient.Connect();
                 if (modbusClient.Connected)
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Connected...");
                     Console.WriteLine("Enter 1: To Read the ReadHoldingRegisters");
                     Console.WriteLine("Enter 2: To Read the ReadInputRegisters");
                     Console.WriteLine("Enter 3: To Read the ReadDiscreteInput");
                     Console.WriteLine("Enter 4: To Read the ReadCoil");
+                    Console.ResetColor();
                     string function = Console.ReadLine();
                     int inputKeyFunction = Convert.ToInt32(function);
                     switch (inputKeyFunction)
@@ -53,7 +55,11 @@ namespace UberModbusClient
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                Console.ReadLine();
+               
             }
         }
 
@@ -64,36 +70,32 @@ namespace UberModbusClient
                 Console.WriteLine("Please Enter The Starting Address of ReadHoldingRegister:");
                 string holdingregister = Console.ReadLine();
                 int register = Convert.ToInt32(holdingregister);
+
                 //Console.WriteLine("Please Enter The Quantity Length:");
                 //string holdingregisterlength = Console.ReadLine();
                 //int registerlength = Convert.ToInt32(holdingregisterlength);
-                int[] readHoldingRegisters = modbusClient.ReadHoldingRegisters(register, 50);//40017               
-                //int[] readInputRegisters = modbusClient.ReadInputRegisters(13, 10);
-                //bool[] readDiscreteInputs  = modbusClient.ReadDiscreteInputs(13,10);    
+
+                int[] readHoldingRegisters = modbusClient.ReadHoldingRegisters(register, 50);//40017 
                 if (readHoldingRegisters != null)
                 {
                     for (int i = 0; i < readHoldingRegisters.Length; i++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Decimal _toDecimal = Convert.ToDecimal(readHoldingRegisters[i]);
-                        Console.WriteLine((register) + ":" + "<" + _toDecimal + ">");//Console.WriteLine("Value Of HoldingRegister" + (register) + ":" + "<" + _toDecimal + ">");
+                        Console.WriteLine((register) + ":" + "<" + _toDecimal + ">");
                         register++;
                     }
                 }
-                //for (int i = 0; i < readInputRegisters.Length; i++)
-                //{
-                //    Console.WriteLine("Value of the InputRegisters" + (i + 1) + ":" + readInputRegisters[i]);
-                //}
-
-                //for (int i = 0; i < readDiscreteInputs.Length; i++)
-                //{
-                //    Console.WriteLine("Value of the ReadDiscreteInputs" + (i + 1) + ":" + readDiscreteInputs[i]);
-                //}
+                Console.ResetColor();
                 modbusClient.Disconnect();
                 Console.ReadKey();
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                Console.ReadLine();
             }
         }
 
@@ -104,22 +106,27 @@ namespace UberModbusClient
                 Console.WriteLine("Please Enter The Starting Address of Input Register:");
                 string holdingregister = Console.ReadLine();
                 int register = Convert.ToInt32(holdingregister);
-                int[] readInputRegisters = modbusClient.ReadInputRegisters(register, 10);
+                int[] readInputRegisters = modbusClient.ReadInputRegisters(register, 50);
                 if (readInputRegisters != null)
                 {
                     for (int i = 0; i < readInputRegisters.Length; i++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Decimal _toDecimal = Convert.ToDecimal(readInputRegisters[i]);
                         Console.WriteLine((register) + ":" + "<" + _toDecimal + ">");
                         register++;
                     }
                 }
+                Console.ResetColor();
                 modbusClient.Disconnect();
                 Console.ReadKey();
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                Console.ReadLine();
             }
         }
 
@@ -146,7 +153,10 @@ namespace UberModbusClient
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                Console.ReadLine();
             }
         }
 
@@ -172,7 +182,10 @@ namespace UberModbusClient
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+                Console.ReadLine();
             }
         }
     }
